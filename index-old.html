@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+    <section>
+        <!-- Create Modal -->
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="createModalLabel">Product Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="productName" class="d-block">Enter Product Name</label>
+                            <input type="text" id="productName" class="form-control" placeholder="Enter Product Name">
+                            <div id="nameError" class="d-none invalid-feedback">name can contain letters, numbers, dots, apostrophes, hyphens</div>
+                        </div>
+                        <div>
+                            <label for="productPrice" class="d-block">Enter Product Price</label>
+                            <input type="text" id="productPrice" class="form-control" placeholder="Enter Product Price">
+                            <div id="priceError" class="d-none invalid-feedback">price must be between 1000 & 10000</div>
+                        </div>
+                        <div>
+                            <label for="productCategory" class="d-block">Enter Product Category</label>
+                            <input type="text" id="productCategory" class="form-control" placeholder="Enter Product Category">
+                            <div id="categoryError" class="d-none invalid-feedback">category can have letters, numbers, 
+                            </div>
+                        </div>
+                        <div>
+                            <label for="productDesc" class="d-block">Enter Product Desc</label>
+                            <input type="text" id="productDesc" class="form-control" placeholder="Enter Product Desc">
+                            <div id="descError" class="d-none invalid-feedback">description can contain letters,numbers, symbols</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal" onclick="resetForm()">Close</button>
+                        <button type="button" class="btn btn-primary" id="createButton" onclick="createProduct()">Create Product</button>
+                        <button type="button" class="btn btn-primary d-none" id="updateButton" onclick="updateProduct()">Update Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" py-5 container bg-secondary text-white rounded-4">
+            <h1 class=" text-center">CRUD OPERATION</h1>
+
+            <div class="text-center py-4">
+                <button class="btn btn-dark w-50 rounded-pill" id="newButton"
+                    data-bs-toggle="modal" data-bs-target="#createModal">New Product</button>
+                <input oninput="searchProduct()" type="search" id="searchInput" class="form-control mx-auto w-50 mt-4"
+                    placeholder="Search">
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">name</th>
+                        <th scope="col">price</th>
+                        <th scope="col">type</th>
+                        <th scope="col">desc</th>
+                        <th scope="col">actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </section>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

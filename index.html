@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .nav-link {
+            color: #adb5bd;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex align-items-start">
+        <!-- Sidebar -->
+        <div class="nav flex-column nav-pills p-3 text-white text-start" id="v-pills-tab"
+            style="background-color: #343a40;height: 100dvh;" role="tablist" aria-orientation="vertical">
+            <h4 class="text-center text-white">Dashboard</h4>
+            <button class="nav-link text-start active" id="v-pills-home-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                aria-selected="true">Home</button>
+
+            <button class="nav-link text-start" id="v-pills-users-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-users" type="button" role="tab" aria-controls="v-pills-users"
+                aria-selected="false">Users</button>
+
+            <button class="nav-link text-start" id="v-pills-products-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products"
+                aria-selected="false">Products</button>
+
+            <button class="nav-link text-start" id="v-pills-orders-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-orders" type="button" role="tab" aria-controls="v-pills-orders"
+                aria-selected="false">Orders</button>
+
+            <button class="nav-link text-start" id="v-pills-settings-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings"
+                aria-selected="false">Messages</button>
+        </div>
+
+        <!-- Content -->
+        <div class="tab-content w-100 px-4" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
+                tabindex="0">
+                <h1>Home</h1>
+                <p>Welcome to the dashboard.</p>
+            </div>
+            <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab"
+                tabindex="0">
+                <h1>Users</h1>
+                <p>Manage user accounts here.</p>
+            </div>
+            <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab"
+                tabindex="0">
+                <!-- Create Modal -->
+                <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="createModalLabel">Product Information</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <label for="productName" class="d-block">Enter Product Name</label>
+                                    <input type="text" id="productName" class="form-control"
+                                        placeholder="Enter Product Name">
+                                    <div id="nameError" class="d-none invalid-feedback">name can contain letters,
+                                        numbers, dots, apostrophes, hyphens</div>
+                                </div>
+                                <div>
+                                    <label for="productPrice" class="d-block">Enter Product Price</label>
+                                    <input type="text" id="productPrice" class="form-control"
+                                        placeholder="Enter Product Price">
+                                    <div id="priceError" class="d-none invalid-feedback">price must be between 1000 &
+                                        10000</div>
+                                </div>
+                                <div>
+                                    <label for="productCategory" class="d-block">Enter Product Category</label>
+                                    <input type="text" id="productCategory" class="form-control"
+                                        placeholder="Enter Product Category">
+                                    <div id="categoryError" class="d-none invalid-feedback">category can have letters,
+                                        numbers,
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="productDesc" class="d-block">Enter Product Desc</label>
+                                    <input type="text" id="productDesc" class="form-control"
+                                        placeholder="Enter Product Desc">
+                                    <div id="descError" class="d-none invalid-feedback">description can contain
+                                        letters,numbers, symbols</div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeButton" data-bs-dismiss="modal"
+                                    onclick="resetForm()">Close</button>
+                                <button type="button" class="btn btn-primary" id="createButton"
+                                    onclick="createProduct()">Create Product</button>
+                                <button type="button" class="btn btn-primary d-none" id="updateButton"
+                                    onclick="updateProduct()">Update Product</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Content -->
+                <h1 class="text-center">Product CRUD Operations</h1>
+                <div class="d-flex justify-content-between text-center my-4">
+                    <input oninput="searchProduct()" type="search" id="searchInput"
+                        class="form-control w-50" placeholder="Search">
+                    <button class="btn btn-dark" id="newButton" data-bs-toggle="modal"
+                        data-bs-target="#createModal">New Product</button>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">name</th>
+                            <th scope="col">price</th>
+                            <th scope="col">type</th>
+                            <th scope="col">desc</th>
+                            <th scope="col">actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab"
+                tabindex="0">
+                <h1>Orders</h1>
+                <p>Review recent orders.</p>
+            </div>
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"
+                tabindex="0">
+                <h1>Settings</h1>
+                <p>Adjust your preferences.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
